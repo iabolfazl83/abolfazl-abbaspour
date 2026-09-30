@@ -27,6 +27,14 @@ npm run build      # production build
 npm run typecheck
 ```
 
+## Contact form & inbox
+
+The contact form posts to `/api/contact`, which stores each inquiry as a private JSON file in
+**Vercel Blob** (store `portfolio-inbox`) and sends a best-effort email notification via FormSubmit.
+
+Read, reply to and delete messages at **`/inbox`** — protected by the `INBOX_PASSWORD`
+environment variable (change it in Vercel → Project → Settings → Environment Variables, then redeploy).
+
 ## Deploying
 
 Deployed on Vercel. `NEXT_PUBLIC_SITE_URL` can be set to a custom domain; otherwise the
