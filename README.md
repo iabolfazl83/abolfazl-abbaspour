@@ -16,7 +16,7 @@ a pinned "frame by frame" process sequence, smooth scrolling and kinetic typogra
 ## Editing content
 
 All copy lives in [`src/lib/content.ts`](src/lib/content.ts): profile, services, process steps,
-projects, experience, skills and contact-form options. The résumé is served from `public/`.
+projects, experience, skills and contact-form options. The Resume is served from `public/`.
 
 ## Scripts
 
