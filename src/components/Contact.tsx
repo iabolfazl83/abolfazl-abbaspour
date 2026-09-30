@@ -52,7 +52,7 @@ export default function Contact() {
                 </Magnetic>
                 <Magnetic strength={0.2}>
                   <a href={profile.resume} target="_blank" rel="noreferrer" className="btn-ghost">
-                    Résumé <span aria-hidden="true">↓</span>
+                    Resume <span aria-hidden="true">↓</span>
                   </a>
                 </Magnetic>
               </div>
@@ -64,6 +64,7 @@ export default function Contact() {
                 {[
                   ["LinkedIn", profile.linkedin],
                   ["GitHub", profile.github],
+                  ["Telegram", profile.telegram]
                 ].map(([label, href]) => (
                   <li key={label}>
                     <a
