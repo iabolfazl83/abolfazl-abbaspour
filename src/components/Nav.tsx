@@ -170,7 +170,8 @@ export default function Nav() {
           <div className="flex gap-6 overflow-hidden">
             <a data-menu-item href={profile.github} target="_blank" rel="noreferrer">GitHub ↗</a>
             <a data-menu-item href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a>
-            <a data-menu-item href={profile.resume} target="_blank" rel="noreferrer">Résumé ↗</a>
+            <a data-menu-item href={profile.telegram} target="_blank" rel="noreferrer">Telegram ↗</a>
+            <a data-menu-item href={profile.resume} target="_blank" rel="noreferrer">Resume ↗</a>
           </div>
         </div>
       </div>
