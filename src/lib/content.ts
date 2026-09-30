@@ -7,8 +7,9 @@ export const profile = {
   email: "gabolfazl83@gmail.com",
   github: "https://github.com/iabolfazl83",
   linkedin: "https://linkedin.com/in/abolfazlabbaspour",
+  telegram: "https://t.me/+989335403596",
   resume: "/Abolfazl_Abbaspour_Resume.pdf",
-  location: "Based in Iran — working worldwide",
+  location: "Working worldwide",
   timezone: "Asia/Tehran",
   tagline:
     "I design and build fast, modern and unforgettable web experiences that turn visitors into customers.",
@@ -39,9 +40,9 @@ export const marquee = [
 
 export const about = {
   statement:
-    "I'm Abolfazl — a front-end developer with 3 years of professional experience turning complex ideas into fast, elegant and maintainable web products. From modernizing legacy enterprise systems to architecting full-stack Next.js apps, I obsess over the details your customers actually feel: speed, clarity and craft.",
+    "I'm Abolfazl — a front-end developer with 4+ years of professional experience turning complex ideas into fast, elegant and maintainable web products. From modernizing legacy enterprise systems to architecting full-stack Next.js apps, I obsess over the details your customers actually feel: speed, clarity and craft.",
   stats: [
-    { value: 3, suffix: "+", label: "Years of professional experience" },
+    { value: 4, suffix: "+", label: "Years of professional experience" },
     { value: 5, suffix: "", label: "Enterprise modules shipped" },
     { value: 4, suffix: "", label: "Rendering strategies in my toolbox" },
     { value: 2, suffix: "", label: "Live products you can try today" },
@@ -129,22 +130,6 @@ export type Project = {
 export const projects: Project[] = [
   {
     index: "01",
-    title: "DevJobs",
-    kind: "Full-stack job board",
-    description:
-      "A production-grade job board built with Next.js 16 and TypeScript — browse, search and save listings backed by a real database and a REST API.",
-    highlights: [
-      "ISR listings (5 min revalidate) + SSR detail pages — each route gets the strategy it deserves",
-      "One shared React Query cache keeps every “Saved” state in sync instantly",
-      "Middleware-protected routes, sanitized HTML and dedicated error boundaries",
-    ],
-    stack: ["Next.js 16", "TypeScript", "React Query", "Zustand", "SQLite", "Tailwind v4"],
-    live: "https://devjobs-pdn9.onrender.com/jobs",
-    repo: "https://github.com/iabolfazl83/devjobs",
-    mockup: "devjobs",
-  },
-  {
-    index: "02",
     title: "Habit Tracker",
     kind: "Productivity app",
     description:
@@ -158,6 +143,22 @@ export const projects: Project[] = [
     live: "https://iabolfazl83.github.io/habit-tracker/",
     repo: "https://github.com/iabolfazl83/habit-tracker",
     mockup: "habits",
+  },
+  {
+    index: "02",
+    title: "DevJobs",
+    kind: "Full-stack job board",
+    description:
+        "A production-grade job board built with Next.js 16 and TypeScript — browse, search and save listings backed by a real database and a REST API.",
+    highlights: [
+      "ISR listings (5 min revalidate) + SSR detail pages — each route gets the strategy it deserves",
+      "One shared React Query cache keeps every “Saved” state in sync instantly",
+      "Middleware-protected routes, sanitized HTML and dedicated error boundaries",
+    ],
+    stack: ["Next.js 16", "TypeScript", "React Query", "Zustand", "SQLite", "Tailwind v4"],
+    live: "https://devjobs-pdn9.onrender.com/jobs",
+    repo: "https://github.com/iabolfazl83/devjobs",
+    mockup: "devjobs",
   },
   {
     index: "03",
@@ -221,4 +222,4 @@ export const skills = [
 ];
 
 export const projectTypes = ["Website", "Web App", "Landing Page", "Dashboard", "Modernization", "Other"];
-export const budgets = ["< $1k", "$1k – $3k", "$3k – $7k", "$7k +", "Not sure yet"];
+export const budgets = ["> $1k", "< $1k", "$1k – $3k", "$3k – $7k", "$7k +", "Not sure yet"];
