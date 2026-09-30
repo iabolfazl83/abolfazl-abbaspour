@@ -31,7 +31,8 @@ export default function Footer() {
             <ul className="space-y-2">
               <li><a href={profile.linkedin} target="_blank" rel="noreferrer" className="hover:text-[var(--fg)]">LinkedIn ↗</a></li>
               <li><a href={profile.github} target="_blank" rel="noreferrer" className="hover:text-[var(--fg)]">GitHub ↗</a></li>
-              <li><a href={profile.resume} target="_blank" rel="noreferrer" className="hover:text-[var(--fg)]">Résumé ↗</a></li>
+              <li><a href={profile.telegram} target="_blank" rel="noreferrer" className="hover:text-[var(--fg)]">Telegram ↗</a></li>
+              <li><a href={profile.resume} target="_blank" rel="noreferrer" className="hover:text-[var(--fg)]">Resume ↗</a></li>
             </ul>
           </div>
           <div>
