@@ -76,9 +76,9 @@ export default function About() {
             <dl className="space-y-3 font-mono text-[11px] uppercase tracking-[0.18em]">
               {[
                 ["Focus", "React / Next.js"],
-                ["Experience", "3+ years"],
+                ["Experience", "4+ years"],
                 ["Languages", "English B2 · Persian"],
-                ["Based", "Iran · Remote worldwide"],
+                ["Based", "Remote worldwide"],
               ].map(([k, v]) => (
                 <div key={k} className="flex justify-between gap-4 border-t border-white/10 pt-3">
                   <dt className="text-[var(--muted)]">{k}</dt>
@@ -87,7 +87,7 @@ export default function About() {
               ))}
             </dl>
             <a href={profile.resume} target="_blank" rel="noreferrer" className="btn-ghost mt-8 w-full justify-center">
-              Download résumé <span aria-hidden="true">↓</span>
+              Download Resume <span aria-hidden="true">↓</span>
             </a>
           </aside>
         </div>
