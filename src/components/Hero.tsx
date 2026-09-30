@@ -80,10 +80,10 @@ export default function Hero() {
         </div>
 
         <h1 data-hero-title className="font-display font-semibold leading-[0.84] tracking-[-0.06em]">
-          <span className="block overflow-hidden pb-[0.04em] text-[15vw] md:text-[13.5vw] xl:text-[12.5vw]">
+          <span className="block overflow-hidden pb-[0.04em] text-[15vw] md:text-[13.5vw] xl:text-[12.5vw] 2xl:text-[180px]">
             <SplitChars text={profile.firstName} charClassName="hero-char" />
           </span>
-          <span className="flex items-end gap-[2vw] overflow-hidden pb-[0.06em] text-[15vw] sm:pl-[6vw] md:pl-[9vw] md:text-[13.5vw] xl:text-[12.5vw]">
+          <span className="flex items-end gap-[2vw] overflow-hidden pb-[0.06em] text-[15vw] sm:pl-[6vw] md:pl-[9vw] md:text-[13.5vw] xl:text-[12.5vw] 2xl:text-[180px]">
             <span className="hero-char mb-[2.4vw] hidden font-serif text-[4vw] font-normal italic tracking-normal text-[var(--muted)] md:inline-block">
               (dev)
             </span>
@@ -124,7 +124,7 @@ export default function Hero() {
             <span className="scroll-line" aria-hidden="true" />
             Scroll to explore
           </a>
-          <span className="hidden md:block">
+          <span className="hidden md:block xl:hidden">
             <Clock />
           </span>
           <span className="flex items-center gap-2">
