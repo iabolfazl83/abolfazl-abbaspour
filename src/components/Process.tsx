@@ -89,7 +89,7 @@ export default function Process() {
         <div className="flex items-start justify-between gap-6">
           <div>
             <SectionLabel index="03" label="Process" />
-            <h2 className="-mt-4 font-display text-4xl font-semibold leading-[0.95] tracking-[-0.05em] md:text-6xl">
+            <h2 className="-mt-4 font-display text-3xl [@media(min-width:375px)]:text-4xl font-semibold leading-[0.95] tracking-[-0.05em] md:text-6xl">
               From idea to launch —
               <br />
               <em className="font-serif font-normal italic tracking-[-0.02em] text-gradient">frame by frame.</em>
@@ -117,14 +117,14 @@ export default function Process() {
               aria-hidden={i !== active}
             >
               <div className="flex items-baseline gap-4">
-                <span className="font-display text-[5.5rem] font-semibold leading-none tracking-[-0.06em] text-outline md:text-[9rem]">
+                <span className="font-display text-[3rem] [@media(min-width:375px)]:text-[4rem] [@media(min-width:425px)]:text-[5.5rem] font-semibold leading-none tracking-[-0.06em] text-outline md:text-[9rem]">
                   {s.step}
                 </span>
                 <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--muted)]">
                   / 0{steps.length}
                 </span>
               </div>
-              <h3 className="mt-2 font-display text-4xl font-semibold tracking-[-0.04em] md:text-6xl">{s.title}</h3>
+              <h3 className="mt-2 font-display text-3xl [@media(min-width:375px)]:text-4xl font-semibold tracking-[-0.04em] md:text-6xl">{s.title}</h3>
               <p className="mt-4 max-w-md text-base leading-relaxed text-[var(--muted)] md:text-lg">{s.body}</p>
               <ul className="mt-6 flex flex-wrap gap-2">
                 {s.points.map((p) => (
