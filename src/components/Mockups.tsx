@@ -153,17 +153,12 @@ function HabitCard({ dark }: { dark: boolean }) {
 
 export function HabitsMock() {
   return (
-    <div className="relative mx-auto grid max-w-[560px] grid-cols-2 items-start gap-4">
+    <div className="relative mx-auto grid max-w-[560px] grid-cols-1 sm:grid-cols-2 items-start gap-4">
       <div className="mt-10">
         <HabitCard dark={false} />
       </div>
       <div>
         <HabitCard dark />
-      </div>
-      <div aria-hidden="true" className="confetti">
-        {Array.from({ length: 14 }).map((_, i) => (
-          <span key={i} style={{ ["--i" as string]: i }} />
-        ))}
       </div>
       <Callout className="-left-2 bottom-4 md:-left-6">
         <span className="status-dot" /> Auto-saved locally
