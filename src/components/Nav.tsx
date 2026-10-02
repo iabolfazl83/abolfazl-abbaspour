@@ -167,7 +167,7 @@ export default function Nav() {
               {profile.email}
             </a>
           </div>
-          <div className="flex gap-6 overflow-hidden">
+          <div className="flex gap-6 overflow-hidden flex-wrap">
             <a data-menu-item href={profile.github} target="_blank" rel="noreferrer">GitHub ↗</a>
             <a data-menu-item href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a>
             <a data-menu-item href={profile.telegram} target="_blank" rel="noreferrer">Telegram ↗</a>
