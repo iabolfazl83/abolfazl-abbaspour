@@ -36,6 +36,7 @@ export const metadata: Metadata = {
     "Frontend Developer",
     "React Developer",
     "React.js Developer",
+    "React js Developer",
     "Next.js Developer",
     "Next js Developer",
     "Next Developer",
