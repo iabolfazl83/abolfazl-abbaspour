@@ -19,12 +19,13 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
     ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
     : "http://localhost:3000";
 
-const title = `${profile.name} — Front-End Developer (React / Next.js)`;
+const title = `${profile.name} — Front-End Developer (${profile.stack})`;
 const description =
   "Front-end developer crafting fast, modern and unforgettable websites and web apps with React, Next.js and TypeScript. Available for freelance projects worldwide.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  verification: { google: "BRhq45DE0NHpt6s7jyxd4jOoUhKBaNjv6an3HXBjZME" },
   title: { default: title, template: `%s — ${profile.name}` },
   description,
   keywords: [
