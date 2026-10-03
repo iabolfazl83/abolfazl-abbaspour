@@ -222,4 +222,4 @@ export const skills = [
 ];
 
 export const projectTypes = ["Website", "Web App", "Landing Page", "Dashboard", "Modernization", "Other"];
-export const budgets = ["> $1k", "< $1k", "$1k – $3k", "$3k – $7k", "$7k +", "Not sure yet"];
+export const budgets = ["< $1k", "$1k – $3k", "$3k – $7k", "$7k +", "Not sure yet"];
