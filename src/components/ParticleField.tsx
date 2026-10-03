@@ -378,7 +378,7 @@ export default function ParticleField() {
 
     const isSmall = window.innerWidth < 768;
     const COUNT = isSmall ? 6500 : 13000;
-    const dpr = Math.min(window.devicePixelRatio || 1, isSmall ? 1.5 : 1.75);
+    let dpr = Math.min(window.devicePixelRatio || 1, isSmall ? 1.5 : 1.75);
     renderer.setPixelRatio(dpr);
     renderer.setClearColor(0x000000, 0);
 
@@ -399,6 +399,14 @@ export default function ParticleField() {
     for (let i = 0; i < r4.length; i++) r4[i] = rand();
     geometry.setAttribute("aRand", new THREE.BufferAttribute(r4, 4));
     geometry.boundingSphere = new THREE.Sphere(new THREE.Vector3(), 20);
+    // Shuffled index so shrinking the draw range drops a random subset, not one side of a shape.
+    const order = new Uint32Array(COUNT);
+    for (let i = 0; i < COUNT; i++) order[i] = i;
+    for (let i = COUNT - 1; i > 0; i--) {
+      const j = Math.floor(rand() * (i + 1));
+      [order[i], order[j]] = [order[j], order[i]];
+    }
+    geometry.setIndex(new THREE.BufferAttribute(order, 1));
 
     const uniforms = {
       uTime: { value: 0 },
@@ -466,6 +474,20 @@ export default function ParticleField() {
       intro.start = performance.now();
     });
 
+    /* ---------- adaptive quality ---------- */
+    // If frames take too long, step down resolution and particle count (never back up,
+    // so quality can't oscillate). Measured after the intro, once shaders have compiled.
+    const quality = { level: 0, frames: 0, total: 0, since: performance.now() + 3000 };
+    const degrade = (avgMs: number) => {
+      if (quality.level >= 3 || avgMs < 21) return;
+      quality.level++;
+      dpr = Math.max(0.75, dpr * 0.8);
+      renderer.setPixelRatio(dpr);
+      renderer.setSize(width, height, false);
+      uniforms.uPixelRatio.value = dpr;
+      geometry.setDrawRange(0, Math.floor(COUNT * (1 - quality.level * 0.18)));
+    };
+
     /* ---------- loop ---------- */
     let raf = 0;
     let last = performance.now();
@@ -474,8 +496,18 @@ export default function ParticleField() {
 
     const tick = (now: number) => {
       raf = requestAnimationFrame(tick);
-      const dt = Math.min((now - last) / 1000, 0.05);
+      const frameMs = now - last;
+      const dt = Math.min(frameMs / 1000, 0.05);
       last = now;
+      if (now > quality.since && frameMs < 250) {
+        quality.frames++;
+        quality.total += frameMs;
+        if (quality.frames >= 90) {
+          degrade(quality.total / quality.frames);
+          quality.frames = 0;
+          quality.total = 0;
+        }
+      }
       if (!reduced) elapsed += dt;
 
       const k = 1 - Math.exp(-dt * 3.2);

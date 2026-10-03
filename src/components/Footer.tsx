@@ -52,12 +52,22 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 flex flex-col gap-4 font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--muted)] md:flex-row md:items-center md:justify-between">
-          <span>© {new Date().getFullYear()} {profile.name}</span>
-          <span>Designed &amp; built with Next.js · Three.js · GSAP</span>
-          <a href="#top" className="hover:text-[var(--fg)]">
-            Back to top ↑
-          </a>
+          <span>
+            © {new Date().getFullYear()} {profile.name}. All rights reserved.
+          </span>
+          <span className="flex gap-6">
+            <a href="/privacy" className="hover:text-[var(--fg)]">
+              Privacy
+            </a>
+            <a href="#top" className="hover:text-[var(--fg)]">
+              Back to top ↑
+            </a>
+          </span>
         </div>
+        <p className="mt-4 max-w-3xl text-[10px] leading-relaxed text-[var(--muted)]/70">
+          The design, animations and source code of this website are original work by {profile.name} and protected by
+          copyright. Copying, reproducing or reusing any part of them without written permission is prohibited.
+        </p>
       </div>
     </footer>
   );

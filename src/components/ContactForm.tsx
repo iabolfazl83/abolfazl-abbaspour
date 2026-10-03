@@ -36,7 +36,7 @@ type Status = "idle" | "sending" | "sent" | "error";
 
 export default function ContactForm() {
   const [type, setType] = useState(projectTypes[0]);
-  const [budget, setBudget] = useState(budgets[4]);
+  const [budget, setBudget] = useState(budgets.includes("Not sure yet") ? "Not sure yet" : budgets[budgets.length - 1]);
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
 
@@ -54,7 +54,7 @@ export default function ContactForm() {
           name: data.get("name"),
           email: data.get("email"),
           message: data.get("message"),
-          website: data.get("website"),
+          botcheck: data.get("botcheck") === "on",
           type,
           budget,
         }),
@@ -88,8 +88,8 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} className="glass relative rounded-[2rem] p-6 md:p-10">
-      {/* honeypot for bots — hidden from people and screen readers */}
-      <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute left-[-9999px] h-0 w-0 opacity-0" />
+      {/* Honeypot for bots: a hidden checkbox (browser autofill never ticks checkboxes). */}
+      <input type="checkbox" name="botcheck" tabIndex={-1} aria-hidden="true" className="hidden" />
 
       <div className="grid gap-6 md:grid-cols-2">
         <label className="field">
@@ -127,7 +127,12 @@ export default function ContactForm() {
               </a>
             </span>
           ) : (
-            "Free consultation · No commitment"
+            <>
+              Free consultation · No commitment ·{" "}
+              <a href="/privacy" className="underline decoration-white/30 underline-offset-2 hover:text-[var(--fg)]">
+                Privacy
+              </a>
+            </>
           )}
         </p>
         <button type="submit" disabled={status === "sending"} className="btn-primary btn-lg justify-center disabled:opacity-60">

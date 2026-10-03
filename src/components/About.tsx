@@ -94,7 +94,7 @@ export default function About() {
 
         <div className="mt-20 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/10 md:mt-28 lg:grid-cols-4">
           {about.stats.map((s) => (
-            <div key={s.label} data-reveal="up" className="stat-cell bg-[var(--bg)]/80 p-6 backdrop-blur md:p-10">
+            <div key={s.label} data-reveal="up" className="stat-cell bg-[var(--bg)]/90 p-6 md:p-10">
               <div className="font-display text-5xl font-semibold tracking-[-0.05em] md:text-7xl">
                 <StatCounter value={s.value} suffix={s.suffix} />
               </div>

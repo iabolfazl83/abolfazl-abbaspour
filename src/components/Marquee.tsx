@@ -31,17 +31,28 @@ export default function Marquee() {
     const el = ref.current;
     if (!el) return;
     const skew = gsap.quickTo(el, "skewY", { duration: 0.5, ease: "power3.out" });
-    let raf = 0;
-    const loop = () => {
-      raf = requestAnimationFrame(loop);
-      skew(Math.max(-4, Math.min(4, sceneState.velocity * -0.12)));
+    let last = 0;
+    const update = () => {
+      const target = Math.max(-4, Math.min(4, sceneState.velocity * -0.12));
+      if (Math.abs(target - last) < 0.02) return;
+      last = target;
+      skew(target);
     };
-    raf = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(raf);
+    // Only tick (and only animate the CSS tracks) while the marquee is on screen.
+    const io = new IntersectionObserver(([entry]) => {
+      el.classList.toggle("is-offscreen", !entry.isIntersecting);
+      if (entry.isIntersecting) gsap.ticker.add(update);
+      else gsap.ticker.remove(update);
+    });
+    io.observe(el);
+    return () => {
+      io.disconnect();
+      gsap.ticker.remove(update);
+    };
   }, []);
 
   return (
-    <section aria-label="Skills" className="relative z-10 overflow-hidden border-y border-white/10 bg-black/30 py-6 backdrop-blur-sm md:py-8">
+    <section aria-label="Skills" className="relative z-10 overflow-hidden border-y border-white/10 bg-black/60 py-6 md:py-8">
       <div ref={ref} className="space-y-3 font-display text-4xl font-semibold tracking-[-0.03em] md:text-6xl">
         <Row items={marquee} />
         <Row
