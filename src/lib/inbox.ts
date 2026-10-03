@@ -11,6 +11,7 @@ export type InboxMessage = {
   budget: string;
   message: string;
   createdAt: string;
+  spam?: boolean;
 };
 
 const PREFIX = "messages/";
@@ -37,11 +38,12 @@ export async function listMessages(): Promise<InboxMessage[]> {
     const page = await list({ prefix: PREFIX, cursor, limit: 1000 });
     const loaded = await Promise.all(
       page.blobs.map(async (b) => {
-        const res = await get(b.pathname, { access: "private", useCache: false });
-        if (!res || res.statusCode !== 200) return null;
         try {
+          const res = await get(b.url, { access: "private", useCache: false });
+          if (!res || res.statusCode !== 200) throw new Error(`status ${res?.statusCode ?? "not found"}`);
           return JSON.parse(await new Response(res.stream).text()) as InboxMessage;
-        } catch {
+        } catch (err) {
+          console.error(`inbox: failed to read ${b.pathname}`, err);
           return null;
         }
       }),

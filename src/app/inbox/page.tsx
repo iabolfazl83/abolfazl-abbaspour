@@ -131,6 +131,7 @@ export default async function InboxPage({ searchParams }: { searchParams: Promis
               </time>
             </div>
             <div className="mt-4 flex flex-wrap gap-2">
+              {m.spam && <span className="tag border-amber-300/50 text-amber-200">Possible spam</span>}
               <span className="tag">{m.type}</span>
               <span className="tag">{m.budget}</span>
             </div>

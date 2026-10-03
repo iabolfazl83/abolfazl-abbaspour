@@ -1,16 +1,21 @@
 "use client";
 
 import { useEffect } from "react";
+import { ScrollTrigger } from "@/lib/gsap";
 import { sceneState } from "@/lib/scene";
+
+type Range = { el: HTMLElement; top: number; bottom: number };
 
 /**
  * Reads `data-scene-*` attributes from sections and points the particle field at the
- * section that currently owns the middle of the viewport. Checking position on every
- * scroll (instead of enter/leave callbacks) keeps it right even after big jumps.
+ * section that owns the middle of the viewport. Section bounds are measured once per
+ * layout change (ScrollTrigger refresh), so scrolling only compares numbers — no
+ * layout reads on the scroll path.
  */
 export default function SceneDirector() {
   useEffect(() => {
     const sections = Array.from(document.querySelectorAll<HTMLElement>("[data-scene]"));
+    let ranges: Range[] = [];
     let current: HTMLElement | null = null;
 
     const apply = (el: HTMLElement) => {
@@ -23,25 +28,35 @@ export default function SceneDirector() {
     };
 
     const pick = () => {
-      const mid = window.innerHeight * 0.5;
-      for (const el of sections) {
-        const r = el.getBoundingClientRect();
+      const mid = window.scrollY + window.innerHeight * 0.5;
+      for (const r of ranges) {
         if (r.top <= mid && r.bottom >= mid) {
-          if (el !== current) {
-            current = el;
-            apply(el);
+          if (r.el !== current) {
+            current = r.el;
+            apply(r.el);
           }
           return;
         }
       }
     };
 
-    pick();
+    const measure = () => {
+      const y = window.scrollY;
+      ranges = sections.map((el) => {
+        // A pinned section's real scroll range is its pin spacer.
+        const box = el.parentElement?.classList.contains("pin-spacer") ? el.parentElement : el;
+        const r = box.getBoundingClientRect();
+        return { el, top: r.top + y, bottom: r.bottom + y };
+      });
+      pick();
+    };
+
+    measure();
+    ScrollTrigger.addEventListener("refresh", measure);
     window.addEventListener("scroll", pick, { passive: true });
-    window.addEventListener("resize", pick);
     return () => {
+      ScrollTrigger.removeEventListener("refresh", measure);
       window.removeEventListener("scroll", pick);
-      window.removeEventListener("resize", pick);
     };
   }, []);
 

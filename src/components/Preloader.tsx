@@ -24,11 +24,18 @@ export default function Preloader() {
     html.classList.add("is-loading");
     getLenis()?.stop();
 
+    // Full count on the first visit of a session, a quick flash on later page loads.
+    let seen = false;
+    try {
+      seen = sessionStorage.getItem("pl-seen") === "1";
+      sessionStorage.setItem("pl-seen", "1");
+    } catch {}
+
     const state = { v: 0 };
     const ctx = gsap.context(() => {
       const count = gsap.to(state, {
         v: 100,
-        duration: 2.1,
+        duration: seen ? 0.5 : 1.4,
         ease: "power2.inOut",
         onUpdate: () => {
           if (counter.current) counter.current.textContent = pad(state.v);
@@ -39,7 +46,7 @@ export default function Preloader() {
 
       const fonts = Promise.race([
         document.fonts?.ready ?? Promise.resolve(),
-        new Promise((r) => setTimeout(r, 2500)),
+        new Promise((r) => setTimeout(r, 1500)),
       ]);
 
       Promise.all([count.then(), fonts]).then(() => {
@@ -50,9 +57,9 @@ export default function Preloader() {
             setDone(true);
           },
         });
-        tl.to("[data-pl-fade]", { yPercent: -120, opacity: 0, duration: 0.7, ease: "expo.in", stagger: 0.03 })
+        tl.to("[data-pl-fade]", { yPercent: -120, opacity: 0, duration: 0.5, ease: "expo.in", stagger: 0.03 })
           .add(() => markReady(), "-=0.1")
-          .to(root.current, { clipPath: "inset(0% 0% 100% 0%)", duration: 1.15, ease: "expo.inOut" }, "-=0.15");
+          .to(root.current, { clipPath: "inset(0% 0% 100% 0%)", duration: 0.95, ease: "expo.inOut" }, "-=0.15");
       });
     }, root);
 

@@ -217,7 +217,7 @@ export function EnterpriseMock() {
         </div>
       </div>
 
-      <div className="mock-float absolute -bottom-8 -left-4 w-44 rotate-[-4deg] rounded-xl border border-white/10 bg-[#12141c]/95 p-3 shadow-2xl backdrop-blur md:-left-10 md:w-52">
+      <div className="mock-float absolute -bottom-8 -left-4 w-44 rotate-[-4deg] rounded-xl border border-white/10 bg-[#12141c]/95 p-3 shadow-2xl md:-left-10 md:w-52">
         <div className="mb-2 text-[9px] uppercase tracking-widest text-white/40">Contract builder</div>
         <div className="space-y-1.5">
           <div className="h-2 w-3/4 rounded bg-white/20" />
@@ -229,7 +229,7 @@ export function EnterpriseMock() {
         </div>
       </div>
 
-      <div className="mock-float absolute -right-3 -top-6 w-44 rotate-[3deg] space-y-1.5 rounded-xl border border-white/10 bg-[#12141c]/95 p-3 shadow-2xl backdrop-blur [animation-delay:1.2s] md:-right-8 md:w-52">
+      <div className="mock-float absolute -right-3 -top-6 w-44 rotate-[3deg] space-y-1.5 rounded-xl border border-white/10 bg-[#12141c]/95 p-3 shadow-2xl [animation-delay:1.2s] md:-right-8 md:w-52">
         <div className="text-[9px] uppercase tracking-widest text-white/40">Internal chat</div>
         <div className="w-fit rounded-lg rounded-bl-none bg-white/10 px-2 py-1 text-[10px]">Letter #218 is ready?</div>
         <div className="ml-auto w-fit rounded-lg rounded-br-none bg-[var(--violet)] px-2 py-1 text-[10px]">Generated ✓ PDF sent</div>

@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import { profile } from "@/lib/content";
+import { siteUrl } from "@/lib/site";
 import "./globals.css";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const sans = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
 const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", display: "swap" });
@@ -13,12 +15,6 @@ const serif = Instrument_Serif({
   variable: "--font-instrument",
   display: "swap",
 });
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
-  ? process.env.NEXT_PUBLIC_SITE_URL
-  : process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : "http://localhost:3000";
 
 const title = `${profile.name} — Front-End Developer (${profile.stack})`;
 const description =
@@ -58,7 +54,15 @@ export const metadata: Metadata = {
     locale: "en_US",
   },
   twitter: { card: "summary_large_image", title, description },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+  },
+  applicationName: profile.name,
+  publisher: profile.name,
+  category: "technology",
+  other: { copyright: `© ${new Date().getFullYear()} ${profile.name}. All rights reserved.` },
 };
 
 export const viewport: Viewport = {
@@ -68,14 +72,40 @@ export const viewport: Viewport = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: profile.name,
-  jobTitle: profile.role,
-  email: `mailto:${profile.email}`,
-  url: siteUrl,
-  sameAs: [profile.github, profile.linkedin, profile.telegram],
-  knowsAbout: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "Web Performance"],
-  worksFor: { "@type": "Organization", name: "HRBOX", url: "https://hrbox.ir/" },
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${siteUrl}/#person`,
+      name: profile.name,
+      jobTitle: profile.role,
+      description,
+      email: `mailto:${profile.email}`,
+      url: siteUrl,
+      image: `${siteUrl}/opengraph-image`,
+      sameAs: [profile.github, profile.linkedin, profile.telegram],
+      knowsAbout: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "Web Performance", "Frontend Development"],
+      knowsLanguage: ["en", "fa"],
+      worksFor: { "@type": "Organization", name: "HRBOX", url: "https://hrbox.ir/" },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: siteUrl,
+      name: profile.name,
+      description,
+      inLanguage: "en",
+      publisher: { "@id": `${siteUrl}/#person` },
+      copyrightHolder: { "@id": `${siteUrl}/#person` },
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": `${siteUrl}/#profile`,
+      url: siteUrl,
+      name: title,
+      isPartOf: { "@id": `${siteUrl}/#website` },
+      mainEntity: { "@id": `${siteUrl}/#person` },
+    },
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -90,8 +120,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
 
       <body>
-      {children}
-      <Analytics />
+        {children}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

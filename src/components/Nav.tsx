@@ -88,7 +88,7 @@ export default function Nav() {
         <nav
           aria-label="Primary"
           className={`mx-auto flex max-w-[1600px] items-center justify-between rounded-full border px-3 py-2 transition-colors duration-500 md:px-4 ${
-            scrolled || open ? "border-white/10 bg-black/40 backdrop-blur-xl" : "border-transparent bg-transparent"
+            scrolled || open ? "border-white/10 bg-black/55 backdrop-blur-md" : "border-transparent bg-transparent"
           }`}
         >
           <a href="#top" className="group flex items-center gap-3" aria-label="Back to top">

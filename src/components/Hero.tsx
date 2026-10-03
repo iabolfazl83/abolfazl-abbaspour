@@ -79,16 +79,19 @@ export default function Hero() {
           <span className="chip hidden sm:inline-flex">{profile.location}</span>
         </div>
 
-        <h1 data-hero-title className="font-display font-semibold leading-[0.84] tracking-[-0.06em]">
+        <h1
+          data-hero-title
+          aria-label={`${profile.name} — ${profile.role} (${profile.stack})`}
+          className="font-display font-semibold leading-[0.84] tracking-[-0.06em]">
           <span className="block overflow-hidden pb-[0.04em] text-[15vw] md:text-[13.5vw] xl:text-[12.5vw] 2xl:text-[180px]">
             <SplitChars text={profile.firstName} charClassName="hero-char" />
-          </span>
+          </span>{" "}
           <span className="flex items-end gap-[2vw] overflow-hidden pb-[0.06em] text-[15vw] sm:pl-[6vw] md:pl-[9vw] md:text-[13.5vw] xl:text-[12.5vw] 2xl:text-[180px]">
-            <span className="hero-char mb-[2.4vw] hidden font-serif text-[4vw] font-normal italic tracking-normal text-[var(--muted)] md:inline-block">
-              (dev)
-            </span>
+            {/* Decorative, drawn via CSS so it isn't part of the heading text search engines read. */}
+            <span aria-hidden="true" data-label="(dev)" className="hero-char mb-[2.4vw] hidden font-serif text-[4vw] font-normal italic tracking-normal text-[var(--muted)] md:inline-block before:content-[attr(data-label)]" />
             <SplitChars text={profile.lastName} charClassName="hero-char text-gradient-soft" />
           </span>
+          <span className="sr-only"> — {profile.role} ({profile.stack})</span>
         </h1>
 
         <div className="mt-8 grid gap-8 border-t border-white/10 pt-6 md:mt-10 md:grid-cols-12 md:gap-6">
